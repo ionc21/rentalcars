@@ -10,12 +10,12 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import lombok.Getter;
 import lombok.Setter;
 
-@JsonPropertyOrder({"vehicle"})
+@JsonPropertyOrder({"vehicleResponse"})
 @JsonSerialize(include = Inclusion.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
-public class Vehicle {
+public class VehicleResponse {
 
 	private List<VehicleList> vehicleList;;
 }

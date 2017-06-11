@@ -16,6 +16,13 @@
     </properties>
 
 	<dependencies>
+	
+		<!-- Utils -->		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-collections4</artifactId>
+		    <version>4.1</version>
+		</dependency>		
 		<dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
@@ -101,12 +108,17 @@
         	<artifactId>camel-spring-javaconfig</artifactId>
         	<version>${camel-version}</version>
         </dependency>
-        <dependency>
-		    <groupId>org.apache.camel</groupId>
-		    <artifactId>camel-http</artifactId>
-		    <version>${camel-version}</version>
-		</dependency>
 
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-jaxrs</artifactId>
+		    <version>1.9.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-xc</artifactId>
+		    <version>1.9.2</version>
+		</dependency>
         <dependency>
         	<groupId>org.codehaus.jackson</groupId>
         	<artifactId>jackson-mapper-asl</artifactId>
@@ -117,11 +129,7 @@
         	<artifactId>jackson-core-asl</artifactId>
         	<version>1.9.2</version>
         </dependency>
-        <dependency>
-        	<groupId>org.codehaus.jackson</groupId>
-        	<artifactId>jackson-xc</artifactId>
-        	<version>1.9.2</version>
-        </dependency>
+               
         <dependency>
         	<groupId>org.projectlombok</groupId>
         	<artifactId>lombok</artifactId>
