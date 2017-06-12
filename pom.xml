@@ -12,7 +12,8 @@
 	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <camel-version>2.17.3</camel-version>        
+        <camel-version>2.17.3</camel-version>
+        <spring.version>4.2.5.RELEASE</spring.version>        
     </properties>
 
 	<dependencies>
@@ -67,27 +68,80 @@
         </dependency>
 
         <!-- logging -->
-
-
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
         
-        <!-- testing -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
-            <version>${camel-version}</version>
-            <scope>test</scope>
-        </dependency>
-         <dependency>
-        	<groupId>org.apache.camel</groupId>
-        	<artifactId>camel-test</artifactId>
-        	<version>${camel-version}</version>
-        	<scope>test</scope>
-        </dependency>
+	     <dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-expression</artifactId>
+		    <version>${spring.version}</version>
+		    <scope>compile</scope>
+		</dependency>	 
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-beans</artifactId>
+		    <version>${spring.version}</version>
+		    <scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-core</artifactId>
+		    <version>${spring.version}</version>
+		    <scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context</artifactId>
+		    <version>${spring.version}</version>
+		    <scope>compile</scope>
+		</dependency>		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-asm</artifactId>
+		    <version>3.1.4.RELEASE</version>
+		    <scope>compile</scope>
+		</dependency>
+        
+        <!-- testing -->       
+		<dependency>
+		    <groupId>org.apache.camel</groupId>
+		    <artifactId>camel-test</artifactId>
+		    <scope>test</scope>
+		    <version>${camel-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.camel</groupId>
+		    <artifactId>camel-test-spring</artifactId>
+		    <scope>test</scope>
+		    <version>${camel-version}</version>
+		</dependency>	 
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.powermock</groupId>
+		    <artifactId>powermock-api-mockito</artifactId>
+		    <version>1.5.1</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.powermock</groupId>
+		    <artifactId>powermock-module-junit4</artifactId>
+		    <version>1.5.1</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.9.5</version>
+		</dependency>
       
         <dependency>
         	<groupId>org.apache.camel</groupId>
@@ -122,7 +176,12 @@
         	<version>1.16.16</version>
         	<scope>provided</scope>
         </dependency>
-       
+
+        <dependency>
+        	<groupId>org.powermock</groupId>
+        	<artifactId>powermock-module-junit4</artifactId>
+        	<version>1.6.1</version>
+        </dependency>
 	</dependencies>
 
     <build>

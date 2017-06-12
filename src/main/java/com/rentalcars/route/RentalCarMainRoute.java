@@ -3,18 +3,18 @@ package com.rentalcars.route;
 import java.text.MessageFormat;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.stereotype.Component;
 
-import com.rentalcars.processor.GetVehicleProcessor;
+import com.rentalcars.processor.VehicleProcessor;
 
-@Component(RentalCarMainRoute.BEAN_NAME)
 public class RentalCarMainRoute extends RouteBuilder {
-
-	public static final String BEAN_NAME = "rentalCarMainRoute";
-	public static final String VEHICLE_ENDPOINT = MessageFormat.format("cxfrs:bean:rentalCarRestService{0}", "?bindingStyle=SimpleConsumer");
+	public static final String VEHICLE_ENDPOINT = MessageFormat.format(
+			"cxfrs:bean:rentalCarRestService{0}",
+			"?bindingStyle=SimpleConsumer");
+	public static final String VEHICLE_ENDPOINT_ID = "vhicleRouteId";
 
 	@Override
 	public void configure() throws Exception {
-		from(VEHICLE_ENDPOINT).process(new GetVehicleProcessor());
+		from(VEHICLE_ENDPOINT).id(VEHICLE_ENDPOINT_ID)
+				.process(new VehicleProcessor());
 	}
 }

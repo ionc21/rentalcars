@@ -29,8 +29,8 @@
 		</cxf:providers>
 	</cxf:rsServer>
        
-    <camel:camelContext xmlns="http://camel.apache.org/schema/spring">     
-        <camel:routeBuilder ref="rentalCarMainRoute"/>        
+    <camel:camelContext id="rentalCarContext" xmlns="http://camel.apache.org/schema/spring">
+        <camel:package>com.rentalcars.route</camel:package>      
     </camel:camelContext>
 
 </beans>

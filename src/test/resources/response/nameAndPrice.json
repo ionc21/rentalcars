@@ -1,0 +1,126 @@
+[
+    {
+        "name": "ChevroletSpark",
+        "price": 120.16
+    },
+    {
+        "name": "Kia Picanto",
+        "price": 136.57
+    },
+    {
+        "name": "Vauxhall Corsa",
+        "price": 139.93
+    },
+    {
+        "name": "Citroen C4",
+        "price": 146.7
+    },
+    {
+        "name": "Ford Focus",
+        "price": 157.85
+    },
+    {
+        "name": "Ford Focus",
+        "price": 157.85
+    },
+    {
+        "name": "VW Golf",
+        "price": 188.97
+    },
+    {
+        "name": "VW Golf",
+        "price": 209.97
+    },
+    {
+        "name": "VW Golf",
+        "price": 209.97
+    },
+    {
+        "name": "Skoda Fabia",
+        "price": 219.71
+    },
+    {
+        "name": "Skoda Fabia",
+        "price": 219.71
+    },
+    {
+        "name": "Chevrolet Cruze",
+        "price": 229.45
+    },
+    {
+        "name": "Audi A1",
+        "price": 234.76
+    },
+    {
+        "name": "Skoda Octavia",
+        "price": 236.24
+    },
+    {
+        "name": "VW Golf Estate",
+        "price": 239.56
+    },
+    {
+        "name": "Skoda Fabia",
+        "price": 240.71
+    },
+    {
+        "name": "Kia Ceed Estate",
+        "price": 311.03
+    },
+    {
+        "name": "Kia Ceed Estate",
+        "price": 311.03
+    },
+    {
+        "name": "Vauxhall Zafira",
+        "price": 319.63
+    },
+    {
+        "name": "Vauxhall Zafira",
+        "price": 323.63
+    },
+    {
+        "name": "Ford Mondeo",
+        "price": 339.31
+    },
+    {
+        "name": "Nissan Juke",
+        "price": 356.28
+    },
+    {
+        "name": "Ford Mondeo",
+        "price": 365.31
+    },
+    {
+        "name": "Ford Mondeo",
+        "price": 365.31
+    },
+    {
+        "name": "Nissan Juke",
+        "price": 463.56
+    },
+    {
+        "name": "VW Passat Estate",
+        "price": 469.37
+    },
+    {
+        "name": "VW Jetta",
+        "price": 508.96
+    },
+    {
+        "name": "VW Jetta",
+        "price": 508.96
+    },
+    {
+        "name": "Ford Galaxy",
+        "price": 706.89
+    },
+    {
+        "name": "VW Sharan",
+        "price": 753.75
+    },
+    {
+        "name": "VW Sharan",
+        "price": 789.75
+    }
+]

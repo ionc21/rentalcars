@@ -33,7 +33,7 @@ import com.rentalcars.model.json.Vehicle;
 import com.rentalcars.model.json.VehicleList;
 import com.rentalcars.transformer.RentalCarTrasnformer;
 
-public class GetVehicleProcessor implements Processor {
+public class VehicleProcessor implements Processor {
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	private static final String FILE_PATH = "src/main/resources/vehicle/vehicle.json";

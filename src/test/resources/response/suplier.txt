@@ -1,0 +1,8 @@
+[
+    "Kia Picanto - Mini - Hertz - 8,90",
+    "Vauxhall Corsa - Economy - Hertz - 8,90",
+    "VW Passat Estate - Intermediate - Hertz - 8,90",
+    "Ford Galaxy - Full size - Hertz - 8,90",
+    "Ford Mondeo - Standard - Hertz - 8,90",
+    "Ford Focus - Compact - Hertz - 8,90"
+]
