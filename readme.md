@@ -1,7 +1,7 @@
 You need to have Java 8 (JDK 1.8) installed on your machine.
 
-Run provect with Maven
-Enter following commend in cmd or run as mvn project from IDE:
+Run project with Maven
+Enter following command in cmd or run as mvn project from IDE:
 cmd: mvn clean install camel:run
 IDE: clean install camel:run
 
