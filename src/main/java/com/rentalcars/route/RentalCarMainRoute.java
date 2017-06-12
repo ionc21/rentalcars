@@ -1,4 +1,4 @@
-package com.rentalcars.routes;
+package com.rentalcars.route;
 
 import java.text.MessageFormat;
 

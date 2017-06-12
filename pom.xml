@@ -67,17 +67,7 @@
         </dependency>
 
         <!-- logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.5</version>
-        </dependency>
 
         <dependency>
             <groupId>log4j</groupId>
@@ -92,17 +82,13 @@
             <version>${camel-version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-        	<groupId>org.apache.activemq</groupId>
-        	<artifactId>activemq-pool</artifactId>
-        	<version>5.14.0</version>
+         <dependency>
+        	<groupId>org.apache.camel</groupId>
+        	<artifactId>camel-test</artifactId>
+        	<version>${camel-version}</version>
+        	<scope>test</scope>
         </dependency>
-        <dependency>
-        	<groupId>org.apache.activemq</groupId>
-        	<artifactId>activemq-camel</artifactId>
-        	<version>5.14.0</version>
-        </dependency>
+      
         <dependency>
         	<groupId>org.apache.camel</groupId>
         	<artifactId>camel-spring-javaconfig</artifactId>
@@ -136,6 +122,7 @@
         	<version>1.16.16</version>
         	<scope>provided</scope>
         </dependency>
+       
 	</dependencies>
 
     <build>
