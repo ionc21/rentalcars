@@ -6,7 +6,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 import com.rentalcars.processor.GetVehicleProcessor;
-import com.rentalcars.sorting.SortByRatingAscDesc;
+import com.rentalcars.sorting.SortByPriceAscDesc;
 
 @Component(RentalCarMainRoute.BEAN_NAME)
 public class RentalCarMainRoute extends RouteBuilder {
@@ -19,6 +19,6 @@ public class RentalCarMainRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		from(VEHICLE_ENDPOINT).process(new GetVehicleProcessor())
-				.beanRef(SortByRatingAscDesc.BEAN_NAME, "sortVehicles");
+				.beanRef(SortByPriceAscDesc.BEAN_NAME, "sortVehicles");
 	}
 }

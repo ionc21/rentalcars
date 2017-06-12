@@ -21,4 +21,20 @@ public class RentalCarService {
 		return "Success";
 	}
 
+	@Path("/nameAndPrice")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getByNameAndPrice() {
+		return "Success";
+	}
+
+	@Path("/spec")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getSpec() {
+		return "Success";
+	}
+
 }
