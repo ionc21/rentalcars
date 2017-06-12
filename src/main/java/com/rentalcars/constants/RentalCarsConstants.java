@@ -6,4 +6,6 @@ public interface RentalCarsConstants {
 	String DESC_SORTING = "desc";
 	String SORT = "sort";
 	String NAME_AND_PRICE = "nameAndPrice";
+	String SPEC = "spec";
+	String HIGH_RATED_SUPPLIER = "highestRatedSupplier";
 }

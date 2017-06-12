@@ -2,7 +2,8 @@ package com.rentalcars.enums;
 
 public enum FuelAC {
 
-	N("Petrol / No AC"), R("Petrol / AC");
+	N("Petrol/No AC"),
+	R("Petrol/AC");
 
 	private final String value;
 

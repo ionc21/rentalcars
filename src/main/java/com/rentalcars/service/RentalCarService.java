@@ -37,4 +37,11 @@ public class RentalCarService {
 		return "Success";
 	}
 
+	@Path("/highestRatedSupplier")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getHighestRatedSupplier() {
+		return "Success";
+	}
 }

@@ -1,9 +1,15 @@
 package com.rentalcars.processor;
 
+import static com.rentalcars.constants.RentalCarsConstants.HIGH_RATED_SUPPLIER;
 import static com.rentalcars.constants.RentalCarsConstants.NAME_AND_PRICE;
+import static com.rentalcars.constants.RentalCarsConstants.SORT;
+import static com.rentalcars.constants.RentalCarsConstants.SPEC;
+import static com.rentalcars.utils.RentalCarsUtil.getHighestRatedSupplier;
+import static com.rentalcars.utils.RentalCarsUtil.getValue;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -18,6 +24,9 @@ import org.apache.cxf.jaxrs.utils.JAXRSUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.rentalcars.bo.Car;
+import com.rentalcars.comparators.PriceComparatorASC;
+import com.rentalcars.comparators.PriceComparatorDESC;
+import com.rentalcars.constants.RentalCarsConstants;
 import com.rentalcars.model.json.Vehicle;
 import com.rentalcars.model.json.VehicleList;
 import com.rentalcars.transformer.RentalCarTrasnformer;
@@ -50,11 +59,22 @@ public class GetVehicleProcessor implements Processor {
 		case NAME_AND_PRICE:
 			mappByNameAndPrice(cars, exchange);
 			break;
+		case SPEC:
+			mappBySpec(cars, exchange);
+			break;
+		case HIGH_RATED_SUPPLIER:
+			mapByHighestRatedSupplier(cars, exchange);
 		default:
 			exchange.getIn().setBody(cars);
 			break;
 		}
 
+	}
+
+	private void mapByHighestRatedSupplier(final List<Car> cars, final Exchange exchange) {
+		List<String> highestRatedSupplierOfCar = getHighestRatedSupplier(cars).stream()
+				.map(c -> String.format("%s - %s - %s - %.2f", c.getName(), c.getCarType(), c.getSupplier(), c.getRating())).collect(Collectors.toList());
+		exchange.getOut().setBody(highestRatedSupplierOfCar);
 	}
 
 	private void mappByNameAndPrice(final List<Car> cars, final Exchange exchange) {
@@ -63,6 +83,23 @@ public class GetVehicleProcessor implements Processor {
 			return car;
 		}).collect(Collectors.toList());
 
+		String sortType = getValue(exchange, SORT);
+		sortCars(sortType, carMappedByNameAndPrice);
+
 		exchange.getIn().setBody(carMappedByNameAndPrice);
 	}
+
+	private void mappBySpec(final List<Car> cars, final Exchange exchange) {
+		List<String> carMappedBySpec = cars.stream().map(c -> c.getSpec()).collect(Collectors.toList());
+		exchange.getIn().setBody(carMappedBySpec);
+	}
+
+	private void sortCars(final String sortType, final List<Car> vehicleSortedColl) {
+		if (sortType.equalsIgnoreCase(RentalCarsConstants.DESC_SORTING)) {
+			Collections.sort(vehicleSortedColl, new PriceComparatorDESC());
+		} else {
+			Collections.sort(vehicleSortedColl, new PriceComparatorASC());
+		}
+	}
+
 }

@@ -12,7 +12,7 @@ import com.rentalcars.utils.SIPPUtil;
 
 import lombok.Getter;
 
-@JsonPropertyOrder({ "sipp", "name", "price", "supplier", "rating" })
+@JsonPropertyOrder({ "sipp", "name", "carType", "price", "supplier", "rating" })
 @JsonSerialize(include = Inclusion.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
@@ -20,6 +20,7 @@ public class Car {
 
 	private String sipp;
 	private String name;
+	private String carType;
 	private Float price;
 	private String supplier;
 	private Float rating;
@@ -29,6 +30,13 @@ public class Car {
 	public Car(final String name, final Float price) {
 		this.name = name;
 		this.price = price;
+	}
+
+	public Car(final String name, final String carType, final String supplier, final Float rating) {
+		this.name = name;
+		this.supplier = supplier;
+		this.rating = rating;
+		this.carType = carType;
 	}
 
 	public Car(final String sipp, final String name, final Float price, final String supplier, final Float rating) {
@@ -92,8 +100,8 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "models.Vehicle{" + "sipp='" + sipp + '\'' + ", name='" + name + '\'' + ", price=" + price + ", supplier='" + supplier + '\'' + ", rating="
-				+ rating + '}';
+		return "models.Vehicle{" + "sipp='" + sipp + '\'' + ", name='" + name + '\'' + ", carType='" + carType + '\'' + ", price=" + price + ", supplier='"
+				+ supplier + '\'' + ", rating=" + rating + '}';
 	}
 
 }
