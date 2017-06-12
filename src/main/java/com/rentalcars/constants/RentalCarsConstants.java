@@ -8,4 +8,5 @@ public interface RentalCarsConstants {
 	String NAME_AND_PRICE = "nameAndPrice";
 	String SPEC = "spec";
 	String HIGH_RATED_SUPPLIER = "highestRatedSupplier";
+	String SCORE = "score";
 }

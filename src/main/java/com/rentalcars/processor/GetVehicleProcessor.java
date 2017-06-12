@@ -2,8 +2,10 @@ package com.rentalcars.processor;
 
 import static com.rentalcars.constants.RentalCarsConstants.HIGH_RATED_SUPPLIER;
 import static com.rentalcars.constants.RentalCarsConstants.NAME_AND_PRICE;
+import static com.rentalcars.constants.RentalCarsConstants.SCORE;
 import static com.rentalcars.constants.RentalCarsConstants.SORT;
 import static com.rentalcars.constants.RentalCarsConstants.SPEC;
+import static com.rentalcars.utils.RentalCarsUtil.getCarsByScoreDESC;
 import static com.rentalcars.utils.RentalCarsUtil.getHighestRatedSupplier;
 import static com.rentalcars.utils.RentalCarsUtil.getValue;
 
@@ -64,6 +66,10 @@ public class GetVehicleProcessor implements Processor {
 			break;
 		case HIGH_RATED_SUPPLIER:
 			mapByHighestRatedSupplier(cars, exchange);
+			break;
+		case SCORE:
+			mapCarsByScore(cars, exchange);
+			break;
 		default:
 			exchange.getIn().setBody(cars);
 			break;
@@ -71,10 +77,16 @@ public class GetVehicleProcessor implements Processor {
 
 	}
 
+	private void mapCarsByScore(final List<Car> cars, final Exchange exchange) {
+		List<String> carsByScore = getCarsByScoreDESC(cars).stream()
+				.map(c -> String.format("%s - %d - %.2f - %.2f", c.getName(), c.getScore(), c.getRating(), c.getSumScores())).collect(Collectors.toList());
+		exchange.getIn().setBody(carsByScore);
+	}
+
 	private void mapByHighestRatedSupplier(final List<Car> cars, final Exchange exchange) {
 		List<String> highestRatedSupplierOfCar = getHighestRatedSupplier(cars).stream()
 				.map(c -> String.format("%s - %s - %s - %.2f", c.getName(), c.getCarType(), c.getSupplier(), c.getRating())).collect(Collectors.toList());
-		exchange.getOut().setBody(highestRatedSupplierOfCar);
+		exchange.getIn().setBody(highestRatedSupplierOfCar);
 	}
 
 	private void mappByNameAndPrice(final List<Car> cars, final Exchange exchange) {

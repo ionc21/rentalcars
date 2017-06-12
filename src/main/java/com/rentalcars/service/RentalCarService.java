@@ -44,4 +44,12 @@ public class RentalCarService {
 	public String getHighestRatedSupplier() {
 		return "Success";
 	}
+
+	@Path("/score")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getVehiclesByScoreDESC() {
+		return "Success";
+	}
 }
