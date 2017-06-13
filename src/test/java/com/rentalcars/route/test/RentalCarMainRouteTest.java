@@ -25,8 +25,7 @@ import com.rentalcars.constants.RentalCarsConstants;
 import com.rentalcars.processor.VehicleProcessor;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-		"classpath:/META-INF/spring/camel-context.xml"})
+@ContextConfiguration(locations = { "classpath:/META-INF/spring/camel-context.xml" })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class RentalCarMainRouteTest extends CamelTestSupport {
 
@@ -42,10 +41,8 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
 	@Test
 	public void testGetCarsByNameAndPrice() throws Exception {
 		Exchange exchange = new DefaultExchange(camelContext);
-		exchange.getIn().setHeader(Exchange.HTTP_QUERY, format("{0}={1}",
-				RentalCarsConstants.SORT, RentalCarsConstants.ASC_SORTING));
-		exchange.getIn().setHeader(Exchange.HTTP_PATH,
-				format("/vehicle/{0}", RentalCarsConstants.NAME_AND_PRICE));
+		exchange.getIn().setHeader(Exchange.HTTP_QUERY, format("{0}={1}", RentalCarsConstants.SORT, RentalCarsConstants.ASC_SORTING));
+		exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.NAME_AND_PRICE));
 		exchange.getIn().setBody("");
 
 		Exchange responseEchange = producerTemplate.send(exchange);
@@ -59,54 +56,45 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
 	@Test
 	public void testGetCarsSpec() throws Exception {
 		Exchange exchange = new DefaultExchange(camelContext);
-		exchange.getIn().setHeader(Exchange.HTTP_PATH,
-				format("/vehicle/{0}", RentalCarsConstants.SPEC));
+		exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.SPEC));
 		exchange.getIn().setBody("");
 
 		Exchange responseEchange = producerTemplate.send(exchange);
 
 		List<String> cars = responseEchange.getIn().getBody(List.class);
 		assertNotNull(cars);
-		assertEquals(
-				"Ford Focus - CDMR - Compact - 5 doors - Manual - Petrol/AC",
-				cars.get(0));
-		assertEquals(
-				"Ford Galaxy - FVAR - Full size - Passenger Van - Automatic - Petrol/AC",
-				cars.get(1));
+		assertEquals("Ford Focus - CDMR - Compact - 5 doors - Manual - Petrol/AC", cars.get(0));
+		assertEquals("Ford Galaxy - FVAR - Full size - Passenger Van - Automatic - Petrol/AC", cars.get(1));
 	}
 
 	@Test
 	public void testGetHighestRatedSupplier() throws Exception {
 		Exchange exchange = new DefaultExchange(camelContext);
-		exchange.getIn().setHeader(Exchange.HTTP_QUERY, format("{0}={1}",
-				RentalCarsConstants.SORT, RentalCarsConstants.DESC_SORTING));
-		exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}",
-				RentalCarsConstants.HIGH_RATED_SUPPLIER));
+		exchange.getIn().setHeader(Exchange.HTTP_QUERY, format("{0}={1}", RentalCarsConstants.SORT, RentalCarsConstants.DESC_SORTING));
+		exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.HIGH_RATED_SUPPLIER));
 		exchange.getIn().setBody("");
 
 		Exchange responseEchange = producerTemplate.send(exchange);
 
 		List<String> cars = responseEchange.getIn().getBody(List.class);
 		assertNotNull(cars);
-		assertEquals("Kia Picanto - Mini - Hertz - 8,90", cars.get(0));
-		assertEquals("Vauxhall Corsa - Economy - Hertz - 8,90", cars.get(1));
+		assertEquals("Kia Picanto - Mini - Hertz - 8.90", cars.get(0));
+		assertEquals("Vauxhall Corsa - Economy - Hertz - 8.90", cars.get(1));
 	}
 
 	@Test
 	public void testGetScore() throws Exception {
 		Exchange exchange = new DefaultExchange(camelContext);
-		exchange.getIn().setHeader(Exchange.HTTP_QUERY, format("{0}={1}",
-				RentalCarsConstants.SORT, RentalCarsConstants.DESC_SORTING));
-		exchange.getIn().setHeader(Exchange.HTTP_PATH,
-				format("/vehicle/{0}", RentalCarsConstants.SCORE));
+		exchange.getIn().setHeader(Exchange.HTTP_QUERY, format("{0}={1}", RentalCarsConstants.SORT, RentalCarsConstants.DESC_SORTING));
+		exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.SCORE));
 		exchange.getIn().setBody("");
 
 		Exchange responseEchange = producerTemplate.send(exchange);
 
 		List<String> cars = responseEchange.getIn().getBody(List.class);
 		assertNotNull(cars);
-		assertEquals("Ford Galaxy - 7 - 8,90 - 15,90", cars.get(0));
-		assertEquals("VW Jetta - 7 - 8,90 - 15,90", cars.get(1));
+		assertEquals("Ford Galaxy - 7 - 8.90 - 15.90", cars.get(0));
+		assertEquals("VW Jetta - 7 - 8.90 - 15.90", cars.get(1));
 	}
 
 	@Override
@@ -114,8 +102,7 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
 		return new RouteBuilder() {
 			@Override
 			public void configure() {
-				from("direct:start").process(new VehicleProcessor())
-						.to("mock:result");
+				from("direct:start").process(new VehicleProcessor()).to("mock:result");
 			}
 		};
 	}
