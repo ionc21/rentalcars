@@ -77,13 +77,6 @@ public class VehicleProcessor implements Processor {
 
 	}
 
-	// private void mapCarsByScore(final List<Car> cars, final Exchange exchange) {
-	// List<String> carsByScore = getCarsByScoreDESC(cars).stream()
-	// .map(c -> String.format("%s - %d - %.2f - %.2f", c.getName(), c.getScore(), c.getRating(),
-	// c.getSumScores())).collect(Collectors.toList());
-	// exchange.getIn().setBody(carsByScore);
-	// }
-
 	private void mapCarsByScore(final List<Car> cars, final Exchange exchange) {
 		List<Car> carsByScore = getCarsByScoreDESC(cars).stream().map(c -> {
 			Car car = new Car(c.getName(), c.getScore(), c.getRating(), c.getSumScores());
@@ -93,8 +86,10 @@ public class VehicleProcessor implements Processor {
 	}
 
 	private void mapByHighestRatedSupplier(final List<Car> cars, final Exchange exchange) {
-		List<String> highestRatedSupplierOfCar = getHighestRatedSupplier(cars).stream()
-				.map(c -> String.format("%s - %s - %s - %.2f", c.getName(), c.getCarType(), c.getSupplier(), c.getRating())).collect(Collectors.toList());
+		List<Car> highestRatedSupplierOfCar = getHighestRatedSupplier(cars).stream().map(c -> {
+			Car car = new Car(c.getName(), c.getCarTypeBySIPP(), c.getSupplier(), c.getRating());
+			return car;
+		}).collect(Collectors.toList());
 		exchange.getIn().setBody(highestRatedSupplierOfCar);
 	}
 

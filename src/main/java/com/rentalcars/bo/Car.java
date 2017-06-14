@@ -12,6 +12,9 @@ import com.rentalcars.utils.SIPPUtil;
 
 import lombok.Getter;
 
+/*ToDo*/
+/*Next Step is to implement Builder Patern here*/
+
 @JsonPropertyOrder({ "sipp", "name", "score", "carType", "price", "supplier", "rating" })
 @JsonSerialize(include = Inclusion.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -68,7 +71,7 @@ public class Car {
 		return score;
 	}
 
-	public String getCarType() {
+	public String getCarTypeBySIPP() {
 		if (isNotBlank(sipp)) {
 			return SIPPUtil.toString(sipp.charAt(0), 0);
 		}
