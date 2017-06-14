@@ -91,10 +91,10 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
 
 		Exchange responseEchange = producerTemplate.send(exchange);
 
-		List<String> cars = responseEchange.getIn().getBody(List.class);
+		List<Car> cars = responseEchange.getIn().getBody(List.class);
 		assertNotNull(cars);
-		assertEquals("Ford Galaxy - 7 - 8.90 - 15.90", cars.get(0));
-		assertEquals("VW Jetta - 7 - 8.90 - 15.90", cars.get(1));
+		assertEquals("Ford Galaxy", cars.get(0).getName());
+		assertEquals(Float.valueOf(7f), Float.valueOf(cars.get(0).getScore()));
 	}
 
 	@Override

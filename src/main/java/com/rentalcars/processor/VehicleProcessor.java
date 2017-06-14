@@ -29,8 +29,8 @@ import com.rentalcars.bo.Car;
 import com.rentalcars.comparators.PriceComparatorASC;
 import com.rentalcars.comparators.PriceComparatorDESC;
 import com.rentalcars.constants.RentalCarsConstants;
-import com.rentalcars.model.json.VehicleResp;
 import com.rentalcars.model.json.Vehicle;
+import com.rentalcars.model.json.VehicleResp;
 import com.rentalcars.transformer.RentalCarTrasnformer;
 
 public class VehicleProcessor implements Processor {
@@ -77,9 +77,18 @@ public class VehicleProcessor implements Processor {
 
 	}
 
+	// private void mapCarsByScore(final List<Car> cars, final Exchange exchange) {
+	// List<String> carsByScore = getCarsByScoreDESC(cars).stream()
+	// .map(c -> String.format("%s - %d - %.2f - %.2f", c.getName(), c.getScore(), c.getRating(),
+	// c.getSumScores())).collect(Collectors.toList());
+	// exchange.getIn().setBody(carsByScore);
+	// }
+
 	private void mapCarsByScore(final List<Car> cars, final Exchange exchange) {
-		List<String> carsByScore = getCarsByScoreDESC(cars).stream()
-				.map(c -> String.format("%s - %d - %.2f - %.2f", c.getName(), c.getScore(), c.getRating(), c.getSumScores())).collect(Collectors.toList());
+		List<Car> carsByScore = getCarsByScoreDESC(cars).stream().map(c -> {
+			Car car = new Car(c.getName(), c.getScore(), c.getRating(), c.getSumScores());
+			return car;
+		}).collect(Collectors.toList());
 		exchange.getIn().setBody(carsByScore);
 	}
 
@@ -106,11 +115,11 @@ public class VehicleProcessor implements Processor {
 		exchange.getIn().setBody(carMappedBySpec);
 	}
 
-	private void sortCars(final String sortType, final List<Car> vehicleToSort) {
+	private void sortCars(final String sortType, final List<Car> vehicleSortedColl) {
 		if (sortType.equalsIgnoreCase(RentalCarsConstants.DESC_SORTING)) {
-			Collections.sort(vehicleToSort, new PriceComparatorDESC());
+			Collections.sort(vehicleSortedColl, new PriceComparatorDESC());
 		} else {
-			Collections.sort(vehicleToSort, new PriceComparatorASC());
+			Collections.sort(vehicleSortedColl, new PriceComparatorASC());
 		}
 	}
 
