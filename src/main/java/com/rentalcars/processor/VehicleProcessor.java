@@ -106,11 +106,11 @@ public class VehicleProcessor implements Processor {
 		exchange.getIn().setBody(carMappedBySpec);
 	}
 
-	private void sortCars(final String sortType, final List<Car> vehicleSortedColl) {
+	private void sortCars(final String sortType, final List<Car> vehicleToSort) {
 		if (sortType.equalsIgnoreCase(RentalCarsConstants.DESC_SORTING)) {
-			Collections.sort(vehicleSortedColl, new PriceComparatorDESC());
+			Collections.sort(vehicleToSort, new PriceComparatorDESC());
 		} else {
-			Collections.sort(vehicleSortedColl, new PriceComparatorASC());
+			Collections.sort(vehicleToSort, new PriceComparatorASC());
 		}
 	}
 
