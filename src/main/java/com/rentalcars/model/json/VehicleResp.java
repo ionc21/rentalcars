@@ -1,21 +1,22 @@
 package com.rentalcars.model.json;
 
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@JsonPropertyOrder({ "sipp", "name", "price", "supplier", "rating" })
+@JsonPropertyOrder({ "vehicle" })
 @JsonSerialize(include = Inclusion.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public @Data class VehicleList {
+@Getter
+@Setter
+public class VehicleResp {
 
-	private String sipp;
-	private String name;
-	private Float price;
-	private String supplier;
-	private Float rating;
+	private List<Vehicle> vehicleList;
 
 }

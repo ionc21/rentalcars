@@ -29,8 +29,8 @@ import com.rentalcars.bo.Car;
 import com.rentalcars.comparators.PriceComparatorASC;
 import com.rentalcars.comparators.PriceComparatorDESC;
 import com.rentalcars.constants.RentalCarsConstants;
+import com.rentalcars.model.json.VehicleResp;
 import com.rentalcars.model.json.Vehicle;
-import com.rentalcars.model.json.VehicleList;
 import com.rentalcars.transformer.RentalCarTrasnformer;
 
 public class VehicleProcessor implements Processor {
@@ -47,9 +47,9 @@ public class VehicleProcessor implements Processor {
 			exchange.setProperty(entry.getKey(), entry.getValue());
 		}
 
-		final Vehicle vehicleRespFromFile = objectMapper.readValue(new File(FILE_PATH), Vehicle.class);
+		final VehicleResp vehicleRespFromFile = objectMapper.readValue(new File(FILE_PATH), VehicleResp.class);
 
-		List<VehicleList> vehicles = vehicleRespFromFile.getVehicleList();
+		List<Vehicle> vehicles = vehicleRespFromFile.getVehicleList();
 		List<Car> cars = new ArrayList<>(vehicles.size());
 		CollectionUtils.collect(vehicles, RentalCarTrasnformer.VEHICLE_TO_CAR, cars);
 
