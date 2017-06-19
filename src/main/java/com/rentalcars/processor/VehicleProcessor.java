@@ -49,13 +49,9 @@ public class VehicleProcessor implements Processor {
 
 		final VehicleResp vehicleRespFromFile = objectMapper.readValue(new File(FILE_PATH), VehicleResp.class);
 
-		List<Vehicle> vehicles = vehicleRespFromFile.getVehicleList();
-		List<Car> cars = new ArrayList<>(vehicles.size());
-		CollectionUtils.collect(vehicles, RentalCarTrasnformer.VEHICLE_TO_CAR, cars);
+		List<Car> cars = getListOfCars(vehicleRespFromFile);
 
-		String httpPath = exchange.getIn().getHeader(Exchange.HTTP_PATH, String.class);
-		String[] propArray = StringUtils.split(httpPath, "/");
-		String property = propArray[propArray.length - 1];
+		String property = getPathProperty(exchange);
 
 		switch (property) {
 		case NAME_AND_PRICE:
@@ -75,6 +71,20 @@ public class VehicleProcessor implements Processor {
 			break;
 		}
 
+	}
+
+	private List<Car> getListOfCars(final VehicleResp vehicleRespFromFile) {
+		List<Vehicle> vehicles = vehicleRespFromFile.getVehicleList();
+		List<Car> cars = new ArrayList<>(vehicles.size());
+		CollectionUtils.collect(vehicles, RentalCarTrasnformer.VEHICLE_TO_CAR, cars);
+		return cars;
+	}
+
+	private String getPathProperty(final Exchange exchange) {
+		String httpPath = exchange.getIn().getHeader(Exchange.HTTP_PATH, String.class);
+		String[] propArray = StringUtils.split(httpPath, "/");
+		String property = propArray[propArray.length - 1];
+		return property;
 	}
 
 	private void mapCarsByScore(final List<Car> cars, final Exchange exchange) {

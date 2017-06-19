@@ -11,7 +11,6 @@ public class RentalCarTrasnformer {
 
 		@Override
 		public Car transform(final Vehicle input) {
-
 			String sipp = input.getSipp();
 			String name = input.getName();
 			Float price = input.getPrice();
