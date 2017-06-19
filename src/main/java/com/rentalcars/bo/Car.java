@@ -1,6 +1,5 @@
 package com.rentalcars.bo;
 
-import static java.lang.String.format;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -15,14 +14,15 @@ import lombok.Getter;
 /*ToDo*/
 /*Next Step is to implement Builder Patern here*/
 
-@JsonPropertyOrder({ "sipp", "name", "score", "carType", "price", "supplier", "rating" })
+@JsonPropertyOrder({ "sipp", "name", "score", "carType", "spec", "price", "supplier", "rating" })
 @JsonSerialize(include = Inclusion.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true, value = { "carSpec", "carTypeBySIPP" })
 @Getter
 public class Car {
 	private String sipp;
 	private String name;
 	private String carType;
+	private String spec;
 	private Float price;
 	private String supplier;
 	private Integer score;
@@ -62,6 +62,13 @@ public class Car {
 		}
 	}
 
+	public Car(final String sipp, final String name, final String carType, final String spec) {
+		this.sipp = sipp;
+		this.name = name;
+		this.carType = carType;
+		this.spec = spec;
+	}
+
 	private Integer computeScore() {
 
 		int score = hasManualTransmission() ? 1 : 5;
@@ -78,14 +85,14 @@ public class Car {
 		return null;
 	}
 
-	public String getSpec() {
-		if (isNotBlank(name) && isNotBlank(sipp) && isNotBlank(SIPPToString())) {
-			return format("%s - %s - %s", name, sipp, SIPPToString());
+	public String getCarSpec() {
+		if (isNotBlank(name) && isNotBlank(sipp) && isNotBlank(calculateCarSpec())) {
+			return calculateCarSpec();
 		}
 		return null;
 	}
 
-	private String SIPPToString() {
+	private String calculateCarSpec() {
 		StringBuilder builder = new StringBuilder("");
 		if (null != sipp) {
 			int length = sipp.length();

@@ -61,10 +61,10 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
 
 		Exchange responseEchange = producerTemplate.send(exchange);
 
-		List<String> cars = responseEchange.getIn().getBody(List.class);
+		List<Car> cars = responseEchange.getIn().getBody(List.class);
 		assertNotNull(cars);
-		assertEquals("Ford Focus - CDMR - Compact - 5 doors - Manual - Petrol/AC", cars.get(0));
-		assertEquals("Ford Galaxy - FVAR - Full size - Passenger Van - Automatic - Petrol/AC", cars.get(1));
+		assertEquals("Ford Focus", cars.get(0).getName());
+		assertEquals("CDMR", cars.get(0).getSipp());
 	}
 
 	@Test

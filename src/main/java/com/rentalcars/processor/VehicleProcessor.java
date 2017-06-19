@@ -106,7 +106,10 @@ public class VehicleProcessor implements Processor {
 	}
 
 	private void mappBySpec(final List<Car> cars, final Exchange exchange) {
-		List<String> carMappedBySpec = cars.stream().map(c -> c.getSpec()).collect(Collectors.toList());
+		List<Car> carMappedBySpec = cars.stream().map(c -> {
+			Car car = new Car(c.getSipp(), c.getName(), c.getCarType(), c.getCarSpec());
+			return car;
+		}).collect(Collectors.toList());
 		exchange.getIn().setBody(carMappedBySpec);
 	}
 
