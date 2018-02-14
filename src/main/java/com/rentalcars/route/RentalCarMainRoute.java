@@ -2,6 +2,7 @@ package com.rentalcars.route;
 
 import java.text.MessageFormat;
 
+import com.rentalcars.bo.Car;
 import org.apache.camel.builder.RouteBuilder;
 
 import com.rentalcars.processor.VehicleProcessor;

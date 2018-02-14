@@ -55,7 +55,7 @@ public class VehicleProcessor implements Processor {
 
 		switch (property) {
 		case NAME_AND_PRICE:
-			mappByNameAndPrice(cars, exchange);
+			mapByNameAndPrice(cars, exchange);
 			break;
 		case SPEC:
 			mappBySpec(cars, exchange);
@@ -103,7 +103,7 @@ public class VehicleProcessor implements Processor {
 		exchange.getIn().setBody(highestRatedSupplierOfCar);
 	}
 
-	private void mappByNameAndPrice(final List<Car> cars, final Exchange exchange) {
+	private void mapByNameAndPrice(final List<Car> cars, final Exchange exchange) {
 		List<Car> carMappedByNameAndPrice = cars.stream().map(c -> {
 			Car car = new Car(c.getName(), c.getPrice());
 			return car;

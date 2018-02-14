@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://C:/work/interviews-code-example/interview-code-example.iml" filepath="C:/work/interviews-code-example/interview-code-example.iml" />
+      <module fileurl="file://C:/work/lambda-expressions/lambda-expressions.iml" filepath="C:/work/lambda-expressions/lambda-expressions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rentalcars.iml" filepath="$PROJECT_DIR$/rentalcars.iml" />
+    </modules>
+  </component>
+</project>

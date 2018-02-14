@@ -54,9 +54,7 @@ public class Car {
 		this.price = price;
 		this.supplier = supplier;
 		this.rating = rating;
-		if (null != sipp) {
-			this.score = computeScore();
-		}
+		this.score = computeScore();
 		if (score != 0) {
 			this.sumScores = this.score + this.rating;
 		}
