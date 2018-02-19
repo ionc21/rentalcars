@@ -8,3 +8,9 @@
 target/
 gen/
 bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
