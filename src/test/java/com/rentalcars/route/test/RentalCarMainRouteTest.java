@@ -1,14 +1,9 @@
 package com.rentalcars.route.test;
 
-import static java.text.MessageFormat.format;
-
-import java.util.List;
-
-import org.apache.camel.CamelContext;
-import org.apache.camel.EndpointInject;
-import org.apache.camel.Exchange;
-import org.apache.camel.Produce;
-import org.apache.camel.ProducerTemplate;
+import com.rentalcars.bo.Car;
+import com.rentalcars.constants.RentalCarsConstants;
+import com.rentalcars.processor.VehicleProcessor;
+import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.impl.DefaultExchange;
@@ -20,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.rentalcars.bo.Car;
-import com.rentalcars.constants.RentalCarsConstants;
-import com.rentalcars.processor.VehicleProcessor;
+import java.util.List;
+
+import static java.text.MessageFormat.format;
 
 @RunWith(CamelSpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/META-INF/spring/camel-context.xml" })

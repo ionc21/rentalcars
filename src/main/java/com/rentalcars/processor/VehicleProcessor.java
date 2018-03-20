@@ -1,23 +1,9 @@
 package com.rentalcars.processor;
 
-import static com.rentalcars.constants.RentalCarsConstants.HIGH_RATED_SUPPLIER;
-import static com.rentalcars.constants.RentalCarsConstants.NAME_AND_PRICE;
-import static com.rentalcars.constants.RentalCarsConstants.SCORE;
-import static com.rentalcars.constants.RentalCarsConstants.SORT;
-import static com.rentalcars.constants.RentalCarsConstants.SPEC;
-import static com.rentalcars.utils.RentalCarsUtil.getCarsByScoreDESC;
-import static com.rentalcars.utils.RentalCarsUtil.getHighestRatedSupplier;
-import static com.rentalcars.utils.RentalCarsUtil.getValue;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import javax.ws.rs.core.MultivaluedMap;
-
+import com.rentalcars.bo.Car;
+import com.rentalcars.model.json.Vehicle;
+import com.rentalcars.model.json.VehicleResp;
+import com.rentalcars.transformer.RentalCarTrasnformer;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -25,13 +11,17 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.jaxrs.utils.JAXRSUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.rentalcars.bo.Car;
-import com.rentalcars.comparators.PriceComparatorASC;
-import com.rentalcars.comparators.PriceComparatorDESC;
-import com.rentalcars.constants.RentalCarsConstants;
-import com.rentalcars.model.json.Vehicle;
-import com.rentalcars.model.json.VehicleResp;
-import com.rentalcars.transformer.RentalCarTrasnformer;
+import javax.ws.rs.core.MultivaluedMap;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
+import static com.rentalcars.constants.RentalCarsConstants.*;
+import static com.rentalcars.utils.RentalCarsUtil.*;
+import static java.util.Comparator.*;
 
 public class VehicleProcessor implements Processor {
 
@@ -124,10 +114,10 @@ public class VehicleProcessor implements Processor {
 	}
 
 	private void sortCars(final String sortType, final List<Car> vehicleSortedColl) {
-		if (sortType.equalsIgnoreCase(RentalCarsConstants.DESC_SORTING)) {
-			Collections.sort(vehicleSortedColl, new PriceComparatorDESC());
+		if (sortType.equalsIgnoreCase(DESC_SORTING)) {
+			Collections.sort(vehicleSortedColl, comparing(Car::getPrice, reverseOrder()));
 		} else {
-			Collections.sort(vehicleSortedColl, new PriceComparatorASC());
+			Collections.sort(vehicleSortedColl, comparing(Car::getPrice, naturalOrder()));
 		}
 	}
 

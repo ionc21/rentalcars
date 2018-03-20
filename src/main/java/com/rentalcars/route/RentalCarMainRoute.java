@@ -1,14 +1,12 @@
 package com.rentalcars.route;
 
-import java.text.MessageFormat;
-
-import com.rentalcars.bo.Car;
+import com.rentalcars.processor.VehicleProcessor;
 import org.apache.camel.builder.RouteBuilder;
 
-import com.rentalcars.processor.VehicleProcessor;
+import static java.text.MessageFormat.format;
 
 public class RentalCarMainRoute extends RouteBuilder {
-	public static final String VEHICLE_ENDPOINT = MessageFormat.format(
+	public static final String VEHICLE_ENDPOINT = format(
 			"cxfrs:bean:rentalCarRestService{0}",
 			"?bindingStyle=SimpleConsumer");
 	public static final String VEHICLE_ENDPOINT_ID = "vhicleRouteId";

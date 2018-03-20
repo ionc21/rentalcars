@@ -1,15 +1,14 @@
 package com.rentalcars.utils;
 
+import com.rentalcars.bo.Car;
+import org.apache.camel.Exchange;
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import org.apache.camel.Exchange;
-import org.apache.commons.collections.CollectionUtils;
-
-import com.rentalcars.bo.Car;
 
 public class RentalCarsUtil {
 

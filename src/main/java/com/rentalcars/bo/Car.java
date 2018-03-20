@@ -1,15 +1,13 @@
 package com.rentalcars.bo;
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
-
+import com.rentalcars.utils.SIPPUtil;
+import lombok.Getter;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-import com.rentalcars.utils.SIPPUtil;
-
-import lombok.Getter;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 /*ToDo*/
 /*Next Step is to implement Builder Patern here*/

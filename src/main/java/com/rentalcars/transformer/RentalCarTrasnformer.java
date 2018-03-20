@@ -1,9 +1,8 @@
 package com.rentalcars.transformer;
 
-import org.apache.commons.collections4.Transformer;
-
 import com.rentalcars.bo.Car;
 import com.rentalcars.model.json.Vehicle;
+import org.apache.commons.collections4.Transformer;
 
 public class RentalCarTrasnformer {
 
