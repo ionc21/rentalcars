@@ -10,11 +10,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.collections.CollectionUtils.isNotEmpty;
+
 public class RentalCarsUtil {
 
 	public static String getValue(final Exchange exchange, final String property) {
 		List<String> values = exchange.getProperty(property, List.class);
-		if (CollectionUtils.isNotEmpty(values)) {
+		if (isNotEmpty(values)) {
 			return values.get(0);
 		} else {
 			return "";
