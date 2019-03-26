@@ -1,10 +1,11 @@
 package com.rentalcars.route;
 
-import com.rentalcars.processor.VehicleProcessor;
+import static java.text.MessageFormat.format;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static java.text.MessageFormat.format;
+import com.rentalcars.processor.VehicleProcessor;
 
 public class RentalCarMainRoute extends RouteBuilder {
 
@@ -15,7 +16,8 @@ public class RentalCarMainRoute extends RouteBuilder {
             "?bindingStyle=SimpleConsumer");
     public static final String VEHICLE_ENDPOINT_ID = "vhicleRouteId";
 
-    @Override public void configure() throws Exception {
+    @Override
+    public void configure() throws Exception {
         from(VEHICLE_ENDPOINT).id(VEHICLE_ENDPOINT_ID).process(vehicleProcessor);
     }
 }

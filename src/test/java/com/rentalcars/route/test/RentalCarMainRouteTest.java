@@ -1,8 +1,9 @@
 package com.rentalcars.route.test;
 
-import com.rentalcars.bo.Car;
-import com.rentalcars.constants.RentalCarsConstants;
-import com.rentalcars.processor.VehicleProcessor;
+import static java.text.MessageFormat.format;
+
+import java.util.List;
+
 import org.apache.camel.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -15,13 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.List;
+import com.rentalcars.bo.CarBO;
+import com.rentalcars.constants.RentalCarsConstants;
+import com.rentalcars.processor.VehicleProcessor;
 
-import static java.text.MessageFormat.format;
-
-@RunWith(CamelSpringJUnit4ClassRunner.class) @ContextConfiguration(locations = {
-        "classpath:/META-INF/spring/camel-context.xml" }) @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) public class RentalCarMainRouteTest
-        extends CamelTestSupport {
+@RunWith(CamelSpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {
+        "classpath:/META-INF/spring/camel-context.xml" }) @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+public class RentalCarMainRouteTest extends CamelTestSupport {
 
     @EndpointInject(uri = "mock:result")
     private MockEndpoint resulEndpoint;
@@ -43,26 +45,29 @@ import static java.text.MessageFormat.format;
 
         Exchange responseEchange = producerTemplate.send(exchange);
 
-        List<Car> cars = responseEchange.getIn().getBody(List.class);
+
+        List<CarBO> cars = responseEchange.getIn().getBody(List.class);
         assertNotNull(cars);
         assertEquals("ChevroletSpark", cars.get(0).getName());
         assertEquals(Float.valueOf(120.16F), cars.get(0).getPrice());
     }
 
-    @Test public void testGetCarsSpec() throws Exception {
+    @Test
+    public void testGetCarsSpec() throws Exception {
         Exchange exchange = new DefaultExchange(camelContext);
         exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.SPEC));
         exchange.getIn().setBody("");
 
         Exchange responseEchange = producerTemplate.send(exchange);
 
-        List<Car> cars = responseEchange.getIn().getBody(List.class);
+        List<CarBO> cars = responseEchange.getIn().getBody(List.class);
         assertNotNull(cars);
         assertEquals("Ford Focus", cars.get(0).getName());
         assertEquals("CDMR", cars.get(0).getSipp());
     }
 
-    @Test public void testGetHighestRatedSupplier() throws Exception {
+    @Test
+    public void testGetHighestRatedSupplier() throws Exception {
         Exchange exchange = new DefaultExchange(camelContext);
         exchange.getIn().setHeader(Exchange.HTTP_QUERY,
                 format("{0}={1}", RentalCarsConstants.SORT, RentalCarsConstants.DESC_SORTING));
@@ -71,13 +76,14 @@ import static java.text.MessageFormat.format;
 
         Exchange responseEchange = producerTemplate.send(exchange);
 
-        List<Car> cars = responseEchange.getIn().getBody(List.class);
+        List<CarBO> cars = responseEchange.getIn().getBody(List.class);
         assertNotNull(cars);
         assertEquals("Kia Picanto", cars.get(0).getName());
         assertEquals("Mini", cars.get(0).getCarType());
     }
 
-    @Test public void testGetScore() throws Exception {
+    @Test
+    public void testGetScore() throws Exception {
         Exchange exchange = new DefaultExchange(camelContext);
         exchange.getIn().setHeader(Exchange.HTTP_QUERY,
                 format("{0}={1}", RentalCarsConstants.SORT, RentalCarsConstants.DESC_SORTING));
@@ -86,13 +92,14 @@ import static java.text.MessageFormat.format;
 
         Exchange responseEchange = producerTemplate.send(exchange);
 
-        List<Car> cars = responseEchange.getIn().getBody(List.class);
+        List<CarBO> cars = responseEchange.getIn().getBody(List.class);
         assertNotNull(cars);
         assertEquals("Ford Galaxy", cars.get(0).getName());
         assertEquals(Float.valueOf(7f), Float.valueOf(cars.get(0).getScore()));
     }
 
-    @Override protected RouteBuilder createRouteBuilder() {
+    @Override
+    protected RouteBuilder createRouteBuilder() {
         return new RouteBuilder() {
             @Override public void configure() {
                 from("direct:start").process(vehicleProcessor).to("mock:result");

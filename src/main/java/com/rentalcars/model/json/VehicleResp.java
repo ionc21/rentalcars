@@ -1,13 +1,14 @@
 package com.rentalcars.model.json;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @JsonPropertyOrder({ "vehicle" })
 @JsonSerialize(include = Inclusion.NON_NULL)

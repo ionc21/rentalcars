@@ -1,9 +1,18 @@
 package com.rentalcars.processor;
 
-import com.rentalcars.bo.Car;
-import com.rentalcars.model.json.Vehicle;
-import com.rentalcars.model.json.VehicleResp;
-import com.rentalcars.transformer.RentalCarTrasnformer;
+import static com.rentalcars.constants.RentalCarsConstants.*;
+import static com.rentalcars.utils.RentalCarsUtil.*;
+import static java.util.Comparator.*;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+
+import javax.ws.rs.core.MultivaluedMap;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.commons.collections4.CollectionUtils;
@@ -13,17 +22,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.core.MultivaluedMap;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import static com.rentalcars.constants.RentalCarsConstants.*;
-import static com.rentalcars.utils.RentalCarsUtil.*;
-import static java.util.Comparator.*;
+import com.rentalcars.bo.Car;
+import com.rentalcars.bo.CarBO;
+import com.rentalcars.model.json.Vehicle;
+import com.rentalcars.model.json.VehicleResp;
+import com.rentalcars.transformer.RentalCarTrasnformer;
 
 @Component
 public class VehicleProcessor implements Processor {
@@ -36,7 +39,8 @@ public class VehicleProcessor implements Processor {
         this.objectMapper = objectMapper;
     }
 
-    @Override public void process(final Exchange exchange) throws Exception {
+    @Override
+    public void process(final Exchange exchange) throws Exception {
         final String queryString = exchange.getIn().getHeader(Exchange.HTTP_QUERY, String.class);
         final MultivaluedMap<String, String> queryMap = JAXRSUtils.getStructuredParams(queryString, "&", false, false);
 
@@ -72,9 +76,12 @@ public class VehicleProcessor implements Processor {
 
     private List<Car> getListOfCars(final VehicleResp vehicleRespFromFile) {
         List<Vehicle> vehicles = vehicleRespFromFile.getVehicleList();
-        List<Car> cars = new ArrayList<>(vehicles.size());
-        CollectionUtils.collect(vehicles, RentalCarTrasnformer.VEHICLE_TO_CAR, cars);
-        return cars;
+        List<CarBO> carBOList = new ArrayList<>(vehicles.size());
+        final List<Car> carList = new ArrayList<>(vehicles.size());
+        CollectionUtils.collect(vehicles, RentalCarTrasnformer.VEHICLE_TO_CAR, carList);
+        CollectionUtils.collect(carList, RentalCarTrasnformer.CAR_TO_CAR_BO, carBOList);
+
+        return carList;
     }
 
     private String getPathProperty(final Exchange exchange) {
@@ -85,27 +92,24 @@ public class VehicleProcessor implements Processor {
     }
 
     private void mapCarsByScore(final List<Car> cars, final Exchange exchange) {
-        List<Car> carsByScore = getCarsByScoreDESC(cars).stream().map(c -> {
-            Car car = new Car(c.getName(), c.getScore(), c.getRating(), c.getSumScores());
-            return car;
-        }).collect(Collectors.toList());
-        exchange.getIn().setBody(carsByScore);
+        List<CarBO> carsByScore = cars.stream()
+                .map(c -> RentalCarTrasnformer.CAR_TO_CAR_BO.transform(c))
+                .collect(Collectors.toList());
+        exchange.getIn().setBody(getCarsByScoreDESC(carsByScore));
     }
 
     private void mapByHighestRatedSupplier(final List<Car> cars, final Exchange exchange) {
-        List<Car> highestRatedSupplierOfCar = getHighestRatedSupplier(cars).stream().map(c -> {
-            Car car = new Car(c.getName(), c.getCarTypeBySIPP(), c.getSupplier(), c.getRating());
-            return car;
-        }).collect(Collectors.toList());
+        List<CarBO> highestRatedSupplierOfCar = getHighestRatedSupplier(cars)
+                .stream()
+                .map(c ->RentalCarTrasnformer.CAR_TO_CAR_BO.transform(c))
+                .collect(Collectors.toList());
         exchange.getIn().setBody(highestRatedSupplierOfCar);
     }
 
     private void mapByNameAndPrice(final List<Car> cars, final Exchange exchange) {
-        List<Car> carMappedByNameAndPrice = cars.stream().map(c -> {
-            Car car = new Car(c.getName(), c.getPrice());
-            return car;
-        }).collect(Collectors.toList());
-
+        List<CarBO> carMappedByNameAndPrice = cars.stream()
+                .map(c ->RentalCarTrasnformer.CAR_TO_CAR_BO.transform(c))
+                .collect(Collectors.toList());
         String sortType = getValue(exchange, SORT);
         sortCars(sortType, carMappedByNameAndPrice);
 
@@ -113,18 +117,17 @@ public class VehicleProcessor implements Processor {
     }
 
     private void mappBySpec(final List<Car> cars, final Exchange exchange) {
-        List<Car> carMappedBySpec = cars.stream().map(c -> {
-            Car car = new Car(c.getSipp(), c.getName(), c.getCarType(), c.getCarSpec());
-            return car;
-        }).collect(Collectors.toList());
+        List<CarBO> carMappedBySpec = cars.stream()
+                .map(c -> RentalCarTrasnformer.CAR_TO_CAR_BO.transform(c))
+                .collect(Collectors.toList());
         exchange.getIn().setBody(carMappedBySpec);
     }
 
-    private void sortCars(final String sortType, final List<Car> vehicleSortedColl) {
+    private void sortCars(final String sortType, final List<CarBO> vehicleSortedColl) {
         if (sortType.equalsIgnoreCase(DESC_SORTING)) {
-            Collections.sort(vehicleSortedColl, comparing(Car::getPrice, reverseOrder()));
+            Collections.sort(vehicleSortedColl, comparing(CarBO::getPrice, reverseOrder()));
         } else {
-            Collections.sort(vehicleSortedColl, comparing(Car::getPrice, naturalOrder()));
+            Collections.sort(vehicleSortedColl, comparing(CarBO::getPrice, naturalOrder()));
         }
     }
 
