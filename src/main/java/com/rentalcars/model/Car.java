@@ -1,4 +1,4 @@
-package com.rentalcars.bo;
+package com.rentalcars.model;
 
 import lombok.Getter;
 

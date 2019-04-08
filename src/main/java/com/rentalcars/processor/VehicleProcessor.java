@@ -22,10 +22,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.rentalcars.bo.Car;
+import com.rentalcars.model.Car;
 import com.rentalcars.bo.CarBO;
-import com.rentalcars.model.json.Vehicle;
-import com.rentalcars.model.json.VehicleResp;
+import com.rentalcars.model.Vehicle;
+import com.rentalcars.model.VehicleResp;
 import com.rentalcars.transformer.RentalCarTrasnformer;
 
 @Component

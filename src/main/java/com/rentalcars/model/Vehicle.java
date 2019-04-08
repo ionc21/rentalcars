@@ -1,4 +1,4 @@
-package com.rentalcars.model.json;
+package com.rentalcars.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import org.apache.camel.Exchange;
 
-import com.rentalcars.bo.Car;
+import com.rentalcars.model.Car;
 import com.rentalcars.bo.CarBO;
 
 public class RentalCarsUtil {

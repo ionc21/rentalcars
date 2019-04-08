@@ -1,4 +1,4 @@
-package com.rentalcars.model.json;
+package com.rentalcars.model;
 
 import java.util.List;
 

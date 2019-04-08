@@ -4,9 +4,9 @@ import static com.rentalcars.utils.CarUtil.*;
 
 import org.apache.commons.collections4.Transformer;
 
-import com.rentalcars.bo.Car;
+import com.rentalcars.model.Car;
 import com.rentalcars.bo.CarBO;
-import com.rentalcars.model.json.Vehicle;
+import com.rentalcars.model.Vehicle;
 
 public class RentalCarTrasnformer {
 
