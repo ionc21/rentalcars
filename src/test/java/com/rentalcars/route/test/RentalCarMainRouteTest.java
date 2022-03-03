@@ -43,10 +43,10 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
         exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.NAME_AND_PRICE));
         exchange.getIn().setBody("");
 
-        Exchange responseEchange = producerTemplate.send(exchange);
+        Exchange responseExchange = producerTemplate.send(exchange);
 
 
-        List<CarBO> cars = responseEchange.getIn().getBody(List.class);
+        List<CarBO> cars = responseExchange.getIn().getBody(List.class);
         assertNotNull(cars);
         assertEquals("ChevroletSpark", cars.get(0).getName());
         assertEquals(Float.valueOf(120.16F), cars.get(0).getPrice());
@@ -58,9 +58,9 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
         exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.SPEC));
         exchange.getIn().setBody("");
 
-        Exchange responseEchange = producerTemplate.send(exchange);
+        Exchange responseExchange = producerTemplate.send(exchange);
 
-        List<CarBO> cars = responseEchange.getIn().getBody(List.class);
+        List<CarBO> cars = responseExchange.getIn().getBody(List.class);
         assertNotNull(cars);
         assertEquals("Ford Focus", cars.get(0).getName());
         assertEquals("CDMR", cars.get(0).getSipp());
@@ -74,9 +74,9 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
         exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.HIGH_RATED_SUPPLIER));
         exchange.getIn().setBody("");
 
-        Exchange responseEchange = producerTemplate.send(exchange);
+        Exchange responseExchange = producerTemplate.send(exchange);
 
-        List<CarBO> cars = responseEchange.getIn().getBody(List.class);
+        List<CarBO> cars = responseExchange.getIn().getBody(List.class);
         assertNotNull(cars);
         assertEquals("Kia Picanto", cars.get(0).getName());
         assertEquals("Mini", cars.get(0).getCarType());
@@ -90,9 +90,9 @@ public class RentalCarMainRouteTest extends CamelTestSupport {
         exchange.getIn().setHeader(Exchange.HTTP_PATH, format("/vehicle/{0}", RentalCarsConstants.SCORE));
         exchange.getIn().setBody("");
 
-        Exchange responseEchange = producerTemplate.send(exchange);
+        Exchange responseExchange = producerTemplate.send(exchange);
 
-        List<CarBO> cars = responseEchange.getIn().getBody(List.class);
+        List<CarBO> cars = responseExchange.getIn().getBody(List.class);
         assertNotNull(cars);
         assertEquals("Ford Galaxy", cars.get(0).getName());
         assertEquals(Float.valueOf(7f), Float.valueOf(cars.get(0).getScore()));

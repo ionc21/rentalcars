@@ -6,7 +6,7 @@ import static com.rentalcars.constants.RentalCarsConstants.NAME_AND_PRICE;
 import static com.rentalcars.constants.RentalCarsConstants.SCORE;
 import static com.rentalcars.constants.RentalCarsConstants.SORT;
 import static com.rentalcars.constants.RentalCarsConstants.SPEC;
-import static com.rentalcars.transformer.RentalCarTrasnformer.CAR_TO_CAR_BO;
+import static com.rentalcars.transformer.RentalCarTransformer.CAR_TO_CAR_BO;
 import static com.rentalcars.utils.RentalCarsUtil.getCarsByScoreDESC;
 import static com.rentalcars.utils.RentalCarsUtil.getHighestRatedSupplier;
 import static com.rentalcars.utils.RentalCarsUtil.getValue;
@@ -19,7 +19,7 @@ import com.rentalcars.bo.CarBO;
 import com.rentalcars.model.Car;
 import com.rentalcars.model.Vehicle;
 import com.rentalcars.model.VehicleResp;
-import com.rentalcars.transformer.RentalCarTrasnformer;
+import com.rentalcars.transformer.RentalCarTransformer;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +83,7 @@ public class VehicleProcessor implements Processor {
         List<Vehicle> vehicles = vehicleRespFromFile.getVehicleList();
         List<CarBO> carBOList = new ArrayList<>(vehicles.size());
         final List<Car> carList = new ArrayList<>(vehicles.size());
-        collect(vehicles, RentalCarTrasnformer.VEHICLE_TO_CAR, carList);
+        collect(vehicles, RentalCarTransformer.VEHICLE_TO_CAR, carList);
         collect(carList, CAR_TO_CAR_BO, carBOList);
 
         return carList;

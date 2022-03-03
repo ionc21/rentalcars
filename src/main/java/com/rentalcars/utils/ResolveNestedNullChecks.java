@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 @UtilityClass
 public class ResolveNestedNullChecks {
 
-
     public static <T> T resolve(Supplier<T> resolver) {
         try {
             T result = resolver.get();

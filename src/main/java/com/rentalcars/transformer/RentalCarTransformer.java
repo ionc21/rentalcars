@@ -8,7 +8,7 @@ import com.rentalcars.model.Car;
 import com.rentalcars.bo.CarBO;
 import com.rentalcars.model.Vehicle;
 
-public class RentalCarTrasnformer {
+public class RentalCarTransformer {
 
     public static final Transformer<Vehicle, Car> VEHICLE_TO_CAR = (Vehicle v) -> {
         Car.Builder builder = new Car.Builder();

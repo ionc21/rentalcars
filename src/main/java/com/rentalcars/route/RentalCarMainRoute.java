@@ -14,7 +14,7 @@ public class RentalCarMainRoute extends RouteBuilder {
 
     public static final String VEHICLE_ENDPOINT = format("cxfrs:bean:rentalCarRestService{0}",
             "?bindingStyle=SimpleConsumer");
-    public static final String VEHICLE_ENDPOINT_ID = "vhicleRouteId";
+    public static final String VEHICLE_ENDPOINT_ID = "vehicleRouteId";
 
     @Override
     public void configure() throws Exception {

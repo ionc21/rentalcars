@@ -29,7 +29,7 @@ public class RentalCarsUtil {
 		Map<String, Optional<Car>> vehiclesPerCarType = cars.stream()
 				.collect(Collectors.groupingBy(c -> getCarTypeBySIPP(c.getSipp()), Collectors.maxBy(Comparator.comparing(Car::getRating))));
 
-		return vehiclesPerCarType.values().stream().filter(v -> v.isPresent()).map(v -> v.get()).sorted(Comparator.comparing(
+		return vehiclesPerCarType.values().stream().filter(Optional::isPresent).map(Optional::get).sorted(Comparator.comparing(
                 Car::getRating).reversed())
 				.collect(Collectors.toList());
 	}
